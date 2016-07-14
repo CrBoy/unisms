@@ -1,8 +1,6 @@
 # Unisms
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/unisms`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem provides a unified interface to let users dealing with SMS.
 
 ## Installation
 
@@ -22,7 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Basic example: Print the SMS to STDOUT
+```
+sms = Unisms.new
+sms.deliver 'hello', to: '+886999999999'
+```
 
 ## Development
 
@@ -32,7 +34,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/unisms.
+Bug reports and pull requests are welcome on GitHub at https://github.com/CrBoy/unisms.
 
 
 ## License
