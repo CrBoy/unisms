@@ -1,6 +1,6 @@
 module Unisms
 	class Sms
-		@default_adapter = nil
+		@default_adapter = Unisms::Adapter::Stdout.new
 		class << self
 			attr_accessor :default_adapter
 		end
