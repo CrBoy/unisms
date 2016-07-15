@@ -23,7 +23,34 @@ Or install it yourself as:
 Basic example: Print the SMS to STDOUT
 ```
 sms = Unisms.new
-sms.deliver 'hello', to: '+886999999999'
+phone_number = '+886999999999' # the phone number should be international format
+sms.deliver 'hello', to: phone_number
+```
+
+Using Nexmo to send SMS
+```
+nexmo_adapter = Unisms::Adapter::Nexmo.new 'nexmo-api-key', 'nexmo-api-secret'
+sms = Unisms.new nexmo_adapter
+phone_number = '+886999999999' # the phone number should be international format
+sms.deliver 'hello', to: phone_number
+```
+
+Using Kotsms to send SMS
+```
+kotsms_adapter = Unisms::Adapter::Kotsms.new 'kotsms-username', 'kotsms-password'
+sms = Unisms.new kotsms_adapter
+phone_number = '+886999999999'
+sms.deliver 'hello', to: phone_number
+```
+
+Sending message randomly by Nexmo or Kotsms
+```
+nexmo_adapter = Unisms::Adapter::Nexmo.new 'nexmo-api-key', 'nexmo-api-secret'
+kotsms_adapter = Unisms::Adapter::Kotsms.new 'kotsms-username', 'kotsms-password'
+random_router = Unisms::Router::Random.new [nexmo_adapter, kotsms_adapter]
+sms = Unisms.new random_router
+phone_number = '+886999999999'
+sms.deliver 'hello', to: phone_number
 ```
 
 ## Development
