@@ -32,7 +32,7 @@ Using Nexmo to send SMS
 nexmo_adapter = Unisms::Adapter::Nexmo.new 'nexmo-api-key', 'nexmo-api-secret'
 sms = Unisms.new nexmo_adapter
 phone_number = '+886999999999' # the phone number should be international format
-sms.deliver 'hello', to: phone_number
+sms.deliver 'hello', to: phone_number, from: 'unisms'
 ```
 
 Using Kotsms to send SMS
@@ -50,7 +50,7 @@ kotsms_adapter = Unisms::Adapter::Kotsms.new 'kotsms-username', 'kotsms-password
 random_router = Unisms::Router::Random.new [nexmo_adapter, kotsms_adapter]
 sms = Unisms.new random_router
 phone_number = '+886999999999'
-sms.deliver 'hello', to: phone_number
+sms.deliver 'hello', to: phone_number, from: 'unisms'
 ```
 
 Sending message: to Taiwan by Kotsms, and else by Nexmo using custom router
@@ -72,8 +72,8 @@ end
 
 router = TaiwanOptimizedRouter.new
 sms = Unisms.new router
-sms.deliver '哈囉! Taiwan NO.1!', to: '+886999999999'
-sms.deliver 'hello', to: '+1999999999' # I don't know the format of US
+sms.deliver '哈囉! Taiwan NO.1!', to: '+886999999999', from: 'unisms'
+sms.deliver 'hello', to: '+1999999999', from: 'unisms' # I don't know the format of US
 ```
 
 ## Development
