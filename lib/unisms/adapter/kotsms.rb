@@ -9,8 +9,11 @@ module Unisms::Adapter
 		end
 
 		def deliver(message, to: nil, from: nil)
-			@kotsms.deliver to, message, @kotsms_options
+			raise ArgumentError.new("phone number should start with '+'") unless /\A\+.*\z/ === to
+			@kotsms.deliver to[1..-1], message, @kotsms_options
 			true
+		rescue ArgumentError => e
+			Unisms.logger.error "ArgumentError: #{e}"
 		rescue SocketError => e
 			Unisms.logger.error "Failed to send message to #{to}"
 			false
