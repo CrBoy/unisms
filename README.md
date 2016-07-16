@@ -53,6 +53,29 @@ phone_number = '+886999999999'
 sms.deliver 'hello', to: phone_number
 ```
 
+Sending message: to Taiwan by Kotsms, and else by Nexmo using custom router
+```
+class TaiwanOptimizedRouter < Unisms::Router::Base
+	def initialize
+		@nexmo_adapter = Unisms::Adapter::Nexmo.new 'nexmo-api-key', 'nexmo-api-secret'
+		@kotsms_adapter = Unisms::Adapter::Kotsms.new 'kotsms-username', 'kotsms-password'
+	end
+
+	def route(message, to: nil, from: nil)
+		if /\+886.*/ === to
+			@kotsms_adapter
+		else
+			@nexmo_adapter
+		end
+	end
+end
+
+router = TaiwanOptimizedRouter.new
+sms = Unisms.new router
+sms.deliver '哈囉! Taiwan NO.1!', to: '+886999999999'
+sms.deliver 'hello', to: '+1999999999' # I don't know the format of US
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake false` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
