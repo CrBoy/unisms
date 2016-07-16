@@ -8,7 +8,6 @@ module Unisms::Adapter
 		end
 
 		def deliver(message, to: nil, from: nil)
-			puts "Using nexmo to send message '#{message}' to '#{to}'...."
 			@nexmo.send_message(text: message, to: to, from: from, type: 'unicode')
 			true
 		rescue SocketError => e

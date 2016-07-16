@@ -9,7 +9,6 @@ module Unisms::Adapter
 		end
 
 		def deliver(message, to: nil, from: nil)
-			puts "Using kotsms to send message '#{message}' to '#{to}'...."
 			@kotsms.deliver to, message, @kotsms_options
 			true
 		rescue SocketError => e
