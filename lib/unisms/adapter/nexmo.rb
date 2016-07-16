@@ -11,6 +11,7 @@ module Unisms::Adapter
 			@nexmo.send_message(text: message, to: to, from: from, type: 'unicode')
 			true
 		rescue SocketError => e
+			Unisms.logger.error "Failed to send message to #{to}"
 			false
 		end
 	end

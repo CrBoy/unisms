@@ -12,6 +12,7 @@ module Unisms::Adapter
 			@kotsms.deliver to, message, @kotsms_options
 			true
 		rescue SocketError => e
+			Unisms.logger.error "Failed to send message to #{to}"
 			false
 		end
 	end

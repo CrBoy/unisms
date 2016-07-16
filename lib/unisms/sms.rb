@@ -12,6 +12,7 @@ module Unisms
 		end
 
 		def deliver(message, to: nil, from: nil)
+			Unisms.logger.info "Using #{@adapter} to send message to #{to}"
 			@adapter.deliver(message, to: to, from: from)
 		end
 	end
